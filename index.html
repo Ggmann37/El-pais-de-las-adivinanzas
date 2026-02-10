@@ -247,6 +247,19 @@
       });
 
       diplomaBtn.addEventListener("click", () => {
+        const nombre = window.prompt("Introduce tu nombre para el diploma:", "");
+
+        if (nombre === null) {
+          return;
+        }
+
+        const nombreLimpio = nombre.trim();
+
+        if (!nombreLimpio) {
+          window.alert("Debes introducir un nombre para generar el diploma.");
+          return;
+        }
+
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
@@ -260,13 +273,13 @@
 
         doc.setFont("helvetica", "normal");
         doc.setFontSize(18);
-        doc.text("Felicidades, lo has conseguido.", 105, 120, { align: "center" });
+        doc.text(`Felicidades ${nombreLimpio}, lo has conseguido.`, 105, 120, { align: "center" });
 
         doc.setFontSize(12);
         doc.setTextColor(148, 163, 184);
         doc.text("El país de las adivinanzas", 105, 145, { align: "center" });
 
-        doc.save("diploma.pdf");
+        doc.save(`diploma-${nombreLimpio.replace(/\s+/g, "-").toLowerCase()}.pdf`);
       });
     </script>
   </body>
