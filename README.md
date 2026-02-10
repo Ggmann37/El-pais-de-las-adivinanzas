@@ -1,11 +1,24 @@
 # El país de las adivinanzas
 
-Web HTML moderna con validación de código secreto:
+Landing web en HTML con diseño moderno y animaciones.
 
-- Al abrir la página pide introducir un código.
-- Si introduces el código secreto correcto, muestra **Correcto**, abre un panel animado y deja crear un diploma en PDF.
-- Si introduces cualquier otro texto, muestra **Incorrecto**.
+## ¿Cómo funciona?
 
-## Uso
+1. Al abrir la página, se solicita un código secreto.
+2. Si el código es incorrecto, aparece el mensaje **Incorrecto**.
+3. Si el código es correcto, aparece el mensaje **Correcto** y se muestra un panel de victoria con animación.
+4. Desde ese panel puedes descargar un diploma en PDF con el texto: **“Felicidades, lo has conseguido.”**
 
-Abre `index.html` en tu navegador.
+> Nota: el valor del código secreto no se muestra en el README ni en la interfaz.
+
+## Uso en local
+
+Abre el archivo `index.html` directamente en tu navegador, o levanta un servidor local:
+
+```bash
+python3 -m http.server 8000
+```
+
+Luego visita:
+
+- `http://localhost:8000/index.html`
