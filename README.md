@@ -8,7 +8,7 @@ Landing web en HTML con diseño moderno y animaciones.
 2. Si el código es incorrecto, aparece el mensaje **Incorrecto**.
 3. Si el código es correcto, aparece el mensaje **Correcto** y se muestra un panel de victoria con animación.
 4. El panel incluye un botón para crear un diploma en PDF: al pulsar, te pedirá tu nombre y generará el texto **“Felicidades <tu nombre>, lo has conseguido.”**
-5. Incluye un icono de GitHub en la esquina superior derecha para abrir el repositorio en modo visualización.
+5. Incluye un icono de GitHub en la esquina superior derecha para abrir la búsqueda del repositorio en modo visualización (solo lectura).
 
 > Nota: el valor del código secreto no se muestra en el README ni en la interfaz.
 
