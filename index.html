@@ -7,10 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ctext y=%2750%27 font-size=%2750%27%3E%F0%9F%93%9A%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <style>
       :root {
         --bg-1: #0f172a;
@@ -62,6 +59,27 @@
         border-color: #22d3ee;
       }
 
+      .timer {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        min-width: 150px;
+        padding: 0.65rem 0.9rem;
+        border-radius: 12px;
+        border: 1px solid rgba(34, 211, 238, 0.4);
+        background: rgba(15, 23, 42, 0.75);
+        backdrop-filter: blur(8px);
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      .timer.done {
+        border-color: rgba(34, 197, 94, 0.6);
+        color: #86efac;
+      }
+
       .glow {
         position: fixed;
         width: 380px;
@@ -105,6 +123,23 @@
         box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
         transform: translateY(8px);
         animation: entrance 700ms cubic-bezier(0.2, 0.65, 0.2, 1) forwards;
+      }
+
+      .start-screen {
+        text-align: center;
+      }
+
+      .game-screen {
+        display: none;
+      }
+
+      .game-screen.visible {
+        display: block;
+      }
+
+      .start-btn {
+        padding: 1rem 1.6rem;
+        font-size: 1.05rem;
       }
 
       @keyframes entrance {
@@ -232,36 +267,87 @@
       </svg>
     </a>
 
+    <div id="timer" class="timer">⏱️ 00:00</div>
+
     <div class="glow one"></div>
     <div class="glow two"></div>
 
     <main class="card">
-      <h1>Introduce el código secreto</h1>
-      <p>Introduce código secreto.</p>
+      <section id="startScreen" class="start-screen">
+        <h1>Empezar juego</h1>
+        <p>Pulsa el botón para comenzar el reto.</p>
+        <button id="startBtn" class="start-btn" type="button">Empezar juego</button>
+      </section>
 
-      <div class="input-wrap">
-        <input id="codeInput" type="text" placeholder="Escribe el código..." autocomplete="off" />
-        <button id="checkBtn" type="button">Comprobar</button>
-      </div>
+      <section id="gameScreen" class="game-screen">
+        <h1>Introduce el código secreto</h1>
+        <p>Introduce código secreto.</p>
 
-      <div id="status"></div>
+        <div class="input-wrap">
+          <input id="codeInput" type="text" placeholder="Escribe el código..." autocomplete="off" />
+          <button id="checkBtn" type="button">Comprobar</button>
+        </div>
 
-      <section id="successPanel" class="success-panel">
-        <h2 class="success-title">🎉 ¡Has ganado!</h2>
-        <p>Pulsa para descargar tu diploma en PDF.</p>
-        <button id="diplomaBtn" type="button">Crear diploma PDF</button>
+        <div id="status"></div>
+
+        <section id="successPanel" class="success-panel">
+          <h2 class="success-title">🎉 ¡Has ganado!</h2>
+          <p id="timeResult">Tiempo: 00:00</p>
+          <button id="diplomaBtn" type="button">Crear diploma PDF</button>
+        </section>
       </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script>
+      const startScreen = document.getElementById("startScreen");
+      const gameScreen = document.getElementById("gameScreen");
+      const startBtn = document.getElementById("startBtn");
       const input = document.getElementById("codeInput");
       const checkBtn = document.getElementById("checkBtn");
       const status = document.getElementById("status");
+      const timer = document.getElementById("timer");
+      const timeResult = document.getElementById("timeResult");
       const successPanel = document.getElementById("successPanel");
       const diplomaBtn = document.getElementById("diplomaBtn");
 
       const CORRECT_CODE = "erectus";
+      let startTime = null;
+      let timerInterval = null;
+      let finalTimeText = "00:00";
+
+      function formatSeconds(totalSeconds) {
+        const minutes = Math.floor(totalSeconds / 60)
+          .toString()
+          .padStart(2, "0");
+        const seconds = Math.floor(totalSeconds % 60)
+          .toString()
+          .padStart(2, "0");
+        return `${minutes}:${seconds}`;
+      }
+
+      function startTimer() {
+        startTime = Date.now();
+        timer.classList.remove("done");
+        timer.textContent = "⏱️ 00:00";
+
+        timerInterval = window.setInterval(() => {
+          const elapsed = Math.floor((Date.now() - startTime) / 1000);
+          timer.textContent = `⏱️ ${formatSeconds(elapsed)}`;
+        }, 250);
+      }
+
+      function stopTimer() {
+        if (timerInterval) {
+          window.clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        finalTimeText = formatSeconds(elapsed);
+        timer.textContent = `⏱️ ${finalTimeText}`;
+        timer.classList.add("done");
+        timeResult.textContent = `Tiempo: ${finalTimeText}`;
+      }
 
       function validateCode() {
         const value = input.value.trim().toLowerCase();
@@ -270,13 +356,22 @@
           status.textContent = "✅ Correcto";
           status.className = "";
           status.style.color = "#22c55e";
+          stopTimer();
           successPanel.classList.add("visible");
         } else {
           status.textContent = "❌ Incorrecto";
           status.className = "incorrect";
+          status.style.color = "";
           successPanel.classList.remove("visible");
         }
       }
+
+      startBtn.addEventListener("click", () => {
+        startScreen.style.display = "none";
+        gameScreen.classList.add("visible");
+        input.focus();
+        startTimer();
+      });
 
       checkBtn.addEventListener("click", validateCode);
       input.addEventListener("keydown", (event) => {
@@ -314,9 +409,12 @@
         doc.setFontSize(18);
         doc.text(`Felicidades ${nombreLimpio}, lo has conseguido.`, 105, 120, { align: "center" });
 
+        doc.setFontSize(14);
+        doc.text(`Tiempo final: ${finalTimeText}`, 105, 138, { align: "center" });
+
         doc.setFontSize(12);
         doc.setTextColor(148, 163, 184);
-        doc.text("El país de las adivinanzas", 105, 145, { align: "center" });
+        doc.text("El país de las adivinanzas", 105, 156, { align: "center" });
 
         doc.save(`diploma-${nombreLimpio.replace(/\s+/g, "-").toLowerCase()}.pdf`);
       });

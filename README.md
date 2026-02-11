@@ -4,11 +4,13 @@ Landing web en HTML con diseño moderno y animaciones.
 
 ## ¿Cómo funciona?
 
-1. Al abrir la página, se solicita un código secreto.
-2. Si el código es incorrecto, aparece el mensaje **Incorrecto**.
-3. Si el código es correcto, aparece el mensaje **Correcto** y se muestra un panel de victoria con animación.
-4. El panel incluye un botón para crear un diploma en PDF: al pulsar, te pedirá tu nombre y generará el texto **“Felicidades <tu nombre>, lo has conseguido.”**
-5. Incluye un icono de GitHub en la esquina superior derecha para abrir la búsqueda del repositorio en modo visualización (solo lectura).
+1. Al abrir la página aparece la pantalla **Empezar juego**.
+2. Al pulsar ese botón, se muestra la pantalla para introducir el código secreto.
+3. En una esquina aparece un temporizador que cuenta el tiempo de la partida.
+4. Si el código es incorrecto, aparece el mensaje **Incorrecto**.
+5. Si el código es correcto, aparece el mensaje **Correcto**, se muestra el panel de victoria y el temporizador se detiene.
+6. Desde ese panel puedes descargar un diploma en PDF: al pulsar, te pedirá tu nombre y generará el texto **“Felicidades <tu nombre>, lo has conseguido.”**, incluyendo también el tiempo final.
+7. Incluye un icono de GitHub en la esquina superior derecha para abrir la búsqueda del repositorio en modo visualización (solo lectura).
 
 > Nota: el valor del código secreto no se muestra en el README ni en la interfaz.
 
