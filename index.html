@@ -39,6 +39,29 @@
         padding: 1rem;
       }
 
+      .github-link {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        color: #f8fafc;
+        text-decoration: none;
+        backdrop-filter: blur(8px);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .github-link:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+        border-color: #22d3ee;
+      }
+
       .glow {
         position: fixed;
         width: 380px;
@@ -73,9 +96,7 @@
       }
 
       .card {
-        width: min(92vw, 640px);
-        max-height: min(94vh, 880px);
-        overflow-y: auto;
+        width: min(92vw, 560px);
         padding: 2rem;
         border-radius: 24px;
         background: var(--card);
@@ -99,10 +120,6 @@
         line-height: 1.2;
       }
 
-      h3 {
-        margin: 0;
-      }
-
       p {
         margin: 0 0 1.2rem;
         color: #cbd5e1;
@@ -113,13 +130,7 @@
         gap: 0.7rem;
       }
 
-      .stack {
-        display: grid;
-        gap: 0.7rem;
-      }
-
-      input,
-      textarea {
+      input {
         width: 100%;
         padding: 0.9rem 1rem;
         border-radius: 12px;
@@ -131,13 +142,7 @@
         font-family: inherit;
       }
 
-      textarea {
-        min-height: 90px;
-        resize: vertical;
-      }
-
-      input:focus,
-      textarea:focus {
+      input:focus {
         border-color: #22d3ee;
         transform: translateY(-1px);
       }
@@ -158,8 +163,7 @@
         box-shadow: 0 10px 30px rgba(34, 211, 238, 0.25);
       }
 
-      #status,
-      #commentStatus {
+      #status {
         margin-top: 0.9rem;
         min-height: 1.4rem;
         font-weight: 600;
@@ -179,14 +183,10 @@
         }
       }
 
-      .success-panel,
-      .comments-panel {
+      .success-panel {
         margin-top: 1.1rem;
         padding: 1rem;
         border-radius: 16px;
-      }
-
-      .success-panel {
         border: 1px solid rgba(34, 197, 94, 0.4);
         background: rgba(34, 197, 94, 0.1);
         display: none;
@@ -194,12 +194,6 @@
 
       .success-panel.visible {
         display: block;
-        animation: pop 500ms ease;
-      }
-
-      .comments-panel {
-        border: 1px solid rgba(34, 211, 238, 0.35);
-        background: rgba(34, 211, 238, 0.08);
         animation: pop 500ms ease;
       }
 
@@ -220,32 +214,24 @@
         margin: 0 0 0.8rem;
         color: #86efac;
       }
-
-      .comments-list {
-        margin-top: 1rem;
-        display: grid;
-        gap: 0.6rem;
-      }
-
-      .comment-item {
-        border: 1px solid rgba(148, 163, 184, 0.3);
-        background: rgba(15, 23, 42, 0.7);
-        border-radius: 12px;
-        padding: 0.7rem 0.8rem;
-      }
-
-      .comment-item strong {
-        color: #67e8f9;
-        display: block;
-        margin-bottom: 0.3rem;
-      }
-
-      .empty-comments {
-        color: #94a3b8;
-      }
     </style>
   </head>
   <body>
+    <a
+      class="github-link"
+      href="https://github.com/search?q=El-pais-de-las-adivinanzas&type=repositories"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Ver repositorio en GitHub (solo lectura)"
+      aria-label="Ver repositorio en GitHub"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path
+          d="M12 2C6.477 2 2 6.486 2 12.018c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.866-.014-1.699-2.782.605-3.369-1.344-3.369-1.344-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.004.071 1.532 1.033 1.532 1.033.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.56 9.56 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.203 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.481A10.02 10.02 0 0 0 22 12.018C22 6.486 17.523 2 12 2Z"
+        ></path>
+      </svg>
+    </a>
+
     <div class="glow one"></div>
     <div class="glow two"></div>
 
@@ -265,18 +251,6 @@
         <p>Pulsa para descargar tu diploma en PDF.</p>
         <button id="diplomaBtn" type="button">Crear diploma PDF</button>
       </section>
-
-      <section class="comments-panel">
-        <h3>Comentarios</h3>
-        <p>Deja tu nombre y comentario. Se guardan aunque refresques la página.</p>
-        <div class="stack">
-          <input id="commentName" type="text" placeholder="Tu nombre" autocomplete="name" />
-          <textarea id="commentText" placeholder="Escribe tu comentario..."></textarea>
-          <button id="saveCommentBtn" type="button">Guardar comentario</button>
-        </div>
-        <div id="commentStatus"></div>
-        <div id="commentsList" class="comments-list"></div>
-      </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -287,23 +261,7 @@
       const successPanel = document.getElementById("successPanel");
       const diplomaBtn = document.getElementById("diplomaBtn");
 
-      const commentName = document.getElementById("commentName");
-      const commentText = document.getElementById("commentText");
-      const saveCommentBtn = document.getElementById("saveCommentBtn");
-      const commentStatus = document.getElementById("commentStatus");
-      const commentsList = document.getElementById("commentsList");
-
       const CORRECT_CODE = "erectus";
-      const COMMENTS_API = "/api/comments";
-
-      function escapeHtml(value) {
-        return value
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#39;");
-      }
 
       function validateCode() {
         const value = input.value.trim().toLowerCase();
@@ -320,87 +278,12 @@
         }
       }
 
-      async function loadComments() {
-        try {
-          const response = await fetch(COMMENTS_API, { cache: "no-store" });
-          if (!response.ok) {
-            throw new Error("No se pudo cargar comentarios");
-          }
-
-          const data = await response.json();
-          return Array.isArray(data.comments) ? data.comments : [];
-        } catch {
-          return [];
-        }
-      }
-
-      function renderComments(comments) {
-        if (!comments.length) {
-          commentsList.innerHTML = '<p class="empty-comments">Todavía no hay comentarios.</p>';
-          return;
-        }
-
-        commentsList.innerHTML = comments
-          .map(
-            (comment) => `
-            <article class="comment-item">
-              <strong>${escapeHtml(comment.name)}</strong>
-              <span>${escapeHtml(comment.text)}</span>
-            </article>
-          `,
-          )
-          .join("");
-      }
-
-      async function refreshComments() {
-        const comments = await loadComments();
-        renderComments(comments);
-      }
-
-      async function saveComment() {
-        const name = commentName.value.trim();
-        const text = commentText.value.trim();
-
-        if (!name || !text) {
-          commentStatus.textContent = "❌ Debes escribir nombre y comentario.";
-          commentStatus.className = "incorrect";
-          return;
-        }
-
-        try {
-          const response = await fetch(COMMENTS_API, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name, text }),
-          });
-
-          if (!response.ok) {
-            throw new Error("No se pudo guardar");
-          }
-
-          commentName.value = "";
-          commentText.value = "";
-          commentStatus.textContent = "✅ Comentario guardado para todos.";
-          commentStatus.className = "";
-          commentStatus.style.color = "#22c55e";
-
-          await refreshComments();
-        } catch {
-          commentStatus.textContent = "❌ No se pudo guardar. Inicia el servidor con python3 server.py";
-          commentStatus.className = "incorrect";
-        }
-      }
-
       checkBtn.addEventListener("click", validateCode);
       input.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
           validateCode();
         }
       });
-
-      saveCommentBtn.addEventListener("click", saveComment);
 
       diplomaBtn.addEventListener("click", () => {
         const nombre = window.prompt("Introduce tu nombre para el diploma:", "");
@@ -437,8 +320,6 @@
 
         doc.save(`diploma-${nombreLimpio.replace(/\s+/g, "-").toLowerCase()}.pdf`);
       });
-
-      refreshComments();
     </script>
   </body>
 </html>
