@@ -8,6 +8,7 @@ Landing web en HTML con diseño moderno y animaciones.
 2. Si el código es incorrecto, aparece el mensaje **Incorrecto**.
 3. Si el código es correcto, aparece el mensaje **Correcto** y se muestra un panel de victoria con animación.
 4. Desde ese panel puedes descargar un diploma en PDF: al pulsar, te pedirá tu nombre y generará el texto **“Felicidades <tu nombre>, lo has conseguido.”**
+5. Incluye un apartado de **Comentarios** que pide nombre y comentario, y los guarda en `localStorage` para que no se pierdan al refrescar.
 
 > Nota: el valor del código secreto no se muestra en el README ni en la interfaz.
 
